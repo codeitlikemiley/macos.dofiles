@@ -1,0 +1,141 @@
+window:
+  position:
+    x: 0
+    y: 0
+  decorations: none
+  opacity: 0.98
+  startup_mode: SimpleFullScreen
+scrolling:
+  history: 10000
+  multiplier: 10
+  auto_scroll: true
+
+tabspaces: 4
+
+draw_bold_text_with_bright_colors: true
+
+font:
+  normal:
+    family: "Hack Nerd Font Mono"
+
+  bold:
+    family: "Hack Nerd Font Mono"
+    style: Bold
+
+  italic:
+    family: "Hack Nerd Font Mono"
+    style: Italic
+
+  size: 18.0
+
+
+# Goldcoders Terminal Theme
+colors:
+  # Default colors
+  primary:
+    background: "#2E3440"
+    foreground: "#D8DEE9"
+
+  # Normal colors
+  normal:
+    black: "#3B4252"
+    red: "#BF616A"
+    green: "#A3BE8C"
+    yellow: "#EBCB8B"
+    blue: "#81A1C1"
+    magenta: "#B48EAD"
+    cyan: "#88C0D0"
+    white: "#E5E9F0"
+
+  # Bright colors
+  bright:
+    black: "#4C566A"
+    red: "#BF616A"
+    green: "#A3BE8C"
+    yellow: "#EBCB8B"
+    blue: "#81A1C1"
+    magenta: "#B48EAD"
+    cyan: "#8FBCBB"
+    white: "#ECEFF4"
+
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+selection:
+  semantic_escape_chars: ",?`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+dynamic_title: true
+
+live_config_reload: true
+
+# Yeah We want tmux Once we Start Alacritty
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux attach || tmux"
+
+key_bindings:
+    # Tmux Related
+  - { key: I,     mods: Command,       chars: "\x01\x49" } # Install Plugins
+  - { key: E,     mods: Command,       chars: "\x01\x45" } # View Window Tree
+  - { key: R,     mods: Command|Shift, chars: "\x01\x74" } # Reload Tmux Config
+
+    # Moving Thru Panes
+  - { key: H,     mods: Command,       chars: "\x01\x68" } # Move Pane Left
+  - { key: J,     mods: Command,       chars: "\x01\x6a" } # Move Pane Down
+  - { key: K,     mods: Command,       chars: "\x01\x6b" } # Move Pane Up
+  - { key: L,     mods: Command,       chars: "\x01\x6c" } # Move Pane Right
+
+  # Manage Windows
+  - { key: N,     mods: Command,       chars: "\x01\x63" } # Create New Window
+  - { key: R,     mods: Command,       chars: "\x01\x72" } # Rename Pane
+  - { key: T,     mods: Command,       chars: "\x01\x63" } # Create New Window
+  - { key: Z,     mods: Command,       chars: "\x01\x7a" } # Zoom Pane
+  - { key: Return,  mods: Command, action: ToggleSimpleFullscreen } # FullScreen
+
+  # Closing Window,Panes ,App
+  - { key: W,     mods: Command,       chars: "\x01\x78" } # Kill Window
+  - { key: W,     mods: Command|Shift, chars: "\x01\x5a" } # Tmux Kill Server
+  - { key: Q,     mods: Command,       chars: "\x01\x51" } # Kill Pane
+  - { key: Escape,     mods: Command, action:  Quit     } # Quit App
+
+    # Vi Modes
+  - { key: Return,  mods: Option,  chars: "\x01\x5b" } # Tmux Vi Mode
+  - { key: Return,  mods: Option|Shift, mode: ~Search,    action: ToggleViMode } # Alacritty Vi Mode
+
+    # Manage Tabbing
+  - { key: Key1,  mods: Command,       chars: "\x01\x31" }
+  - { key: Key2,  mods: Command,       chars: "\x01\x32" }
+  - { key: Key3,  mods: Command,       chars: "\x01\x33" }
+  - { key: Key4,  mods: Command,       chars: "\x01\x34" }
+  - { key: Key5,  mods: Command,       chars: "\x01\x35" }
+  - { key: Key6,  mods: Command,       chars: "\x01\x36" }
+  - { key: Key7,  mods: Command,       chars: "\x01\x37" }
+  - { key: Key8,  mods: Command,       chars: "\x01\x38" }
+  - { key: Key9,  mods: Command,       chars: "\x01\x39" }
+
+
+  # Layouts
+  - { key: V,     mods: Command|Shift,       chars: "\x01\x5f" } # Layout Even Horizontal
+  - { key: S,     mods: Command|Shift, chars: "\x01\x2b" } # Even Layout Horizontal
+
+
+   # Moving Content to other Panes
+  - { key: X,      mods: Command|Shift,  chars: "\x01\x7b" } # Move Current Pane Left
+  - { key: X,     mods: Command,  chars: "\x01\x7d" } # Move Current Pane Right
+
+  # Resizing Panes
+  - { key: H,     mods: Command|Shift, chars: "\x01\x48" } # Decrease Pane Horizontal
+  - { key: J,     mods: Command|Shift, chars: "\x01\x4a" } # Decrease Pane Vertical
+  - { key: K,     mods: Command|Shift, chars: "\x01\x4b" } # Increase Pane Vertical
+  - { key: L,     mods: Command|Shift, chars: "\x01\x4c" } # Increase Pane Horizontal
+
+  # Iterm2 Like Splits
+  - { key: D,     mods: Command|Shift,  chars: "\x01\x73" } # Split Horizontal Pane
+  - { key: D,      mods: Command,  chars: "\x01\x61" } # Split Vertical Pane
+  # Linux Like Paste
+  - { key: F12,   mods: Shift,       action: PasteSelection } # Shift Insert Paste Like in Linux

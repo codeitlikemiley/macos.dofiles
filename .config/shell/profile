@@ -1,0 +1,95 @@
+#!/bin/zsh
+
+export LANG=en_US.UTF-8
+export HISTFILE=$HOME/.local/share/history
+
+# Mirror XDG Path on Arch
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Default Editor
+export EDITOR="nvim"
+
+# ZSH
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH="$XDG_CONFIG_HOME/.oh-my-zsh"
+export ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+
+# Unix Pass
+# For Pass to work with Aldred Pass as of Sept 2023
+# ln -s ~/.local/share/.password-store ~/.password-store
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/.password-store"
+export PASSWORD_STORE_CLIP_TIME=45
+
+
+# Android ENV
+export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_SDK_ROOT=~/Library/Android/sdk
+export ANDROID_AVD_HOME=~/.android/avd
+
+# To use Android SDK Commandline tools add the ff. paths
+export PATH="$PATH":"$ANDROID_SDK_ROOT/platform-tools"
+export PATH="$PATH":"$ANDROID_SDK_ROOT/tools/bin"
+export PATH="$PATH":"$ANDROID_SDK_ROOT/emulator"
+
+# Cargo
+[ -f "$HOME/.cargo/env" ] && source $HOME/.cargo/env
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
+# Starship
+export STARSHIP_CONFIG=~/.config/starship/config.toml
+export STARSHIP_CACHE=$HOME/.config/starship/cache
+
+# Flutter
+export PATH=$PATH:"/Users/uriah/fvm/default/bin"
+
+
+# bun completions
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "/Users/uriah/.bun/_bun" ] && source "/Users/uriah/.bun/_bun"
+
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# Ruby
+[ -s /opt/homebrew/opt/chruby/share/chruby/chruby.sh ] && source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+[ -s /opt/homebrew/opt/chruby/share/chruby/auto.sh ] && source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+
+if command -v chruby >/dev/null 2>&1; then
+   chruby ruby-3.1.4
+fi
+
+# Pyenv
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    # VirtualEnv
+    if command -v pyenv-virtualenv-init 1>/dev/null 2>&1; then
+     eval "$(pyenv virtualenv-init -)"
+     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+    fi
+fi
+
+# Node Env
+if command -v nodenv >/dev/null 2>&1; then
+   eval "$(nodenv init -)"
+   nodenv global 18.16.0
+fi
+
+
+if command -v zoxide >/dev/null 2>&1; then
+ eval "$(zoxide init zsh)"
+fi
+
+# Load macosx SDK
+export SDKROOT=$(xcrun -sdk macosx --show-sdk-path)
+export PATH="$PATH:$HOME/.local/bin"
+
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
+# export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+# export PATH="/Users/uriah/.local/share/solana/install/active_release/bin:$PATH"
+# export GCLOUD_SERVICE_ACCOUNT_CREDENTIALS=`cat /Users/uriah/.config/appstore-connect/play-integrity-kgxfuo0pwpm6mkb-54112fd2ad11.json`

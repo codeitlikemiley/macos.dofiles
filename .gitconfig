@@ -1,0 +1,24 @@
+[user]
+	name = Uriah
+	email = codeitlikemiley@gmail.com
+	signingkey = 6A6A6C8413A83820D1F1E1BD346BCC41CF9D553C
+
+[alias]
+lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+lg = !"git lg1"
+remote-init = "!f() { USERNAME=$(gh api user | jq -r .login); REPO_NAME=$(basename $(pwd)); git remote set-url origin git@github.com:$USERNAME/$REPO_NAME.git; }; f"
+set-remote = "!f() { GIT_USER=$(gh api user | jq -r .login); REPO_NAME=$(basename $(pwd)); git remote add origin git@github.com:$GIT_USER/$REPO_NAME.git; }; f"
+module = "!f() { GIT_USER=$(gh api user | jq -r .login); REPO_NAME=$1; git submodule add git@github.com:$GIT_USER/$REPO_NAME.git $REPO_NAME; }; f"
+create = !gh repo create $(basename $(pwd)) --public
+unalias = "!f() { git config --global --unset alias.$1; }; f"
+upstream = push --set-upstream origin main
+start = !git init && git add . && git commit -m \"init\"
+unmodule = "!f() { REPO_NAME=$1; git submodule deinit -f -- $REPO_NAME; rm -rf .git/modules/$REPO_NAME; git rm -f $REPO_NAME; }; f"
+delete = "!f() { gh repo delete $(basename $(pwd)) --confirm; }; f"
+
+[commit]
+  gpgsign = true
+
+[init]
+    defaultBranch = main

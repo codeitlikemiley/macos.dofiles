@@ -1,0 +1,176 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+
+# Easy Change Default Shell
+alias \
+    shd='sudo ln -sf /bin/dash /var/select/sh' \
+    shb='sudo ln -sf /bin/bash /var/select/sh' \
+    shz='sudo ln -sf /bin/zsh /var/select/sh' \
+    ;
+#     mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
+# Media
+alias \
+    ffmpeg="ffmpeg -hide_banner" \
+    yt="yt-dlp --add-metadata -i" \
+    yt4="yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4'" \
+    yta="yt-dlp -x -f bestaudio/best --audio-format mp3" \
+    ;
+
+# Git
+alias \
+    g="git" \
+    gl="git log --all --decorate --oneline --graph" \
+    gdif="git diff" \
+    gr="git restore" \
+    gcm="git commit -am" \
+    gaa="git add ." \
+    ss="git status" \
+    init="git init && git add . && git commit -m 'init'" \
+    nah="git reset --hard;git clean -df" \
+    wip="git add . && git commit -m 'wip'" \
+    dot="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add" \
+    dots="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME status" \
+    dif="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME diff" \
+    dop="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push" \
+    dpull="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull" \
+    com="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit" \
+    sdif="sudo nvim -d" \
+    diff="nvim -d" \
+    gcs='git clone --depth 1 --filter=blob:none --sparse' \
+    v='nvim'\
+    ;
+
+# Common Utils
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+alias \
+    l="exa -l --color=always --group-directories-first" \
+    ls="exa -D --color=always --group-directories-first" \
+    ll="exa -l --color=always --group-directories-first" \
+    la="exa -FSal --color=always --group-directories-first" \
+    b="bat" \
+    c="clear && pbcopy < /dev/null" \
+    e="open" \
+    grep="grep --color=auto" \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    mkd="mkdir -pv" \
+    cwd='pwd | pbcopy' \
+    hsc="history -c" \
+    path="echo -e ${PATH//:/\\\n}" \
+;
+
+alias \
+    chx="chmod +x" \
+    chax="sudo chmod a+x" \
+    000="sudo chmod 000" \
+    555="sudo chmod 555" \
+    600="sudo chmod 600" \
+    644="sudo chmod 644" \
+    750="sudo chmod 750" \
+    755="sudo chmod 755" \
+    775="sudo chmod 775" \
+    777="sudo chmod 777" \
+    mine="sudo chown -R $(whoami)" \
+    root="sudo su -" \
+    iroot="sudo chown -R root" \
+    perm="stat -f '%Lp'" \
+    ;
+
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+
+################################################################
+### File Navigation
+################################################################
+alias \
+    h="cd ~/ && ls -a" \
+    d="cd ~/Documents && ls -a" \
+    dl="cd ~/Downloads && ls -a" \
+    m="cd ~/Music && ls -a" \
+    P="cd ~/Pictures && ls -a" \
+    cf="cd ~/.config && ls -a" \
+    sc="cd ~/.local/bin && ls -a" \
+    vsc="cd ~/Library/Application\ Support/Code/User" \
+    ;
+
+################################################################
+### Quick Shortcut Editting Config Files
+################################################################
+
+alias \
+    cfa="$EDITOR ~/.config/shell/aliasrc" \
+    cfk="$EDITOR ~/Library/Application\ Support/Code/User/keybindings.json" \
+    cfp="$EDITOR ~/.zprofile" \
+    cfs="$EDITOR ~/.config/starship/config.toml" \
+    cfv="$EDITOR ~/.config/nvim/init.lua" \
+    cfz="$EDITOR $HOME/.config/zsh/.zshrc" \
+    etc="$EDITOR /etc/hosts" \
+    cfV="$EDITOR ~/Library/Application\ Support/Code/User/settings.json" \
+    cft="$EDITOR ~/.tmux.conf" \
+    ;
+
+################################################################
+### Source Config Files Quickly
+################################################################
+
+alias \
+    rz='source $HOME/.config/zsh/.zshrc' \
+    rp='source ~/.config/shell/profile' \
+    ra='source ~/.config/shell/aliasrc' \
+    rz='source ~/.config/zsh/.zshrc' \
+    rt="tmux source-file ~/.tmux.conf" \
+    ;
+
+
+################################################################
+### Project Specific Aliases
+################################################################
+alias \
+    ports='sudo lsof -i -P | grep LISTEN' \
+    macos='open macos/Runner.xcworkspace' \
+    ios='open ios/Runner.xcworkspace' \
+    rmswp='rm ~/.local/share/nvim/swap/*.swp' \
+    sim='open -a Simulator' \
+    ibrew='arch -x86_64 /usr/local/Homebrew/bin/brew' \
+    pgup='pg_ctl -D /opt/homebrew/bin/postgres start' \
+    pgdown='pg_ctl -D /opt/homebrew/var/postgres stop -s -m fast' \
+    dbup='mysql.server start' \
+    dbdown='mysql.server stop' \
+    redisup='redis-server /opt/homebrew/etc/redis.conf' \
+    redisdown='redis-cli shutdown' \
+    px="./.venv/bin/python" \
+    flushdns="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder" \
+    irun="xcrun simctl openurl booted" \
+    xswitch="sudo xcode-select --switch $(xcode-select --print-path)" \
+    arm="/usr/bin/arch -arm64 /bin/zsh --login" \
+    intel="/usr/bin/arch -x86_64 /bin/zsh --login" \
+    ;
+
+function fport(){
+lsof -i:$@
+}
+
+alias rom='cd ~/rubyonmac && ./rom-prime 2>&1 | tee ~/rubyonmac/logs/rom-prime-normal.log'
+
+alias romup='cd ~/Downloads/rubyonmac-prime && /bin/bash install'
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+alias neovide='$HOME/.local/bin/neovide'
+
+function nvc(){
+    rm ~/.local/state/nvim/*.log
+    rm ~/.local/state/nvim/sessions/*.vim
+}
